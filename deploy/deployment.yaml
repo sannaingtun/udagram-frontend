@@ -3,25 +3,29 @@ kind: Deployment
 metadata:
   name: udagram-frontend
   labels:
-    app: udagram-frontend
+    service: udagram-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: udagram-frontend
+      service: udagram-frontend
   template:
     metadata:
       labels:
-        app: udagram-frontend
+        service: udagram-frontend
+        api: external
     spec:
       containers:
-        - name: udagram-frontend
-          image: sannaingtun/udagram-frontend
-          ports:
-            - containerPort: 8100
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 8100
-            initialDelaySeconds: 3
-            periodSeconds: 3
+      - name: udagram-frontend
+        image: sannaingtun/udagram-frontend:latest
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"                
+      restartPolicy: Always
