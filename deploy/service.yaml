@@ -2,17 +2,17 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: udagram-feed-restapi
-  name: udagram-feed-restapi-svc
+    app: udagram-frontend
+  name: udagram-frontend-svc
   namespace: default
-  selfLink: /api/v1/namespaces/default/services/udagram-feed-restapi-svc
+  selfLink: /api/v1/namespaces/default/services/udagram-frontend-svc
 spec:
   ports:
-  - port: 8080
+  - port: 8100
     protocol: TCP
-    targetPort: 8080
+    targetPort: 8100
   selector:
-    app: udagram-feed-restapi
+    app: udagram-frontend
   sessionAffinity: None
   type: ClusterIP
 status:
